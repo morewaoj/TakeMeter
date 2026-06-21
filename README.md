@@ -125,16 +125,6 @@ Rows are gold labels; columns are predicted labels.
 
 The main remaining errors involve ambiguity between `hot_take` and `reaction_noise`, especially when a post mixes humor, sarcasm, and basketball judgment. The model also sometimes treats short basketball-adjacent posts as `analysis` when they mention basketball concepts but do not provide enough reasoning.
 
-## Demo Video Notes
-
-Planned demo outline:
-
-1. Introduce the problem: NBA discourse ranges from useful analysis to unsupported reactions.
-2. Explain the three-label taxonomy.
-3. Show the annotated dataset.
-4. Demonstrate the baseline prompt.
-5. Later, compare baseline results with fine-tuned model results.
-6. Reflect on errors, limitations, and next steps.
 
 ## AI Usage Reflection
 
