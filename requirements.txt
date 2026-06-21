@@ -1,0 +1,7 @@
+numpy<2
+pandas
+scikit-learn
+torch
+transformers==4.41.2
+datasets==2.19.2
+accelerate==0.30.1
