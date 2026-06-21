@@ -89,6 +89,21 @@ Completed steps:
 
 Weighted CrossEntropyLoss was used to address class imbalance so the minority labels mattered more during training.
 
+## Reproducing the Model
+
+The trained model artifacts are not included in the repository because they exceed GitHub size limits.
+
+To regenerate them:
+
+1. Install requirements.
+2. Run:
+
+```bash
+python scripts/train_distilbert.py
+```
+
+The model will be saved locally to `models/distilbert-takemeter` and used by `app/app.py`.
+
 ## Baseline Comparison
 
 The GroqCloud zero-shot baseline is prepared but has not been run successfully in this environment because GroqCloud API access returned a 403/access-block response. No baseline results are reported here.
@@ -125,16 +140,19 @@ Rows are gold labels; columns are predicted labels.
 
 The main remaining errors involve ambiguity between `hot_take` and `reaction_noise`, especially when a post mixes humor, sarcasm, and basketball judgment. The model also sometimes treats short basketball-adjacent posts as `analysis` when they mention basketball concepts but do not provide enough reasoning.
 
-## Demo Video Notes
+### Specific Misclassified Examples
 
-Planned demo outline:
+| Post | Gold Label | Predicted Label | Explanation |
+| --- | --- | --- | --- |
+| "That defensive possession after the missed free throw was worse than the miss itself." | `hot_take` | `analysis` | The model likely focused on the phrase "defensive possession" and treated it as analysis, but the post does not explain the defensive breakdown. |
+| "The stat nerds are going to hate this, but he just does not pass the eye test." | `hot_take` | `analysis` | The model likely treated the stats-versus-eye-test framing as basketball reasoning, but "eye test" is vague and unsupported. |
+| "The hot mic picked the perfect time to expose that huddle." | `reaction_noise` | `analysis` | The model likely focused on "huddle" as a basketball/coaching cue, but the post is mainly a broadcast or game-thread reaction. |
 
-1. Introduce the problem: NBA discourse ranges from useful analysis to unsupported reactions.
-2. Explain the three-label taxonomy.
-3. Show the annotated dataset.
-4. Demonstrate the baseline prompt.
-5. Later, compare baseline results with fine-tuned model results.
-6. Reflect on errors, limitations, and next steps.
+The recurring pattern is that the model sometimes upgrades basketball-adjacent words into `analysis` even when the post lacks real reasoning.
+
+## Demo
+
+TakeMeter includes a working interface for classifying NBA posts. The demo classifies posts into `analysis`, `hot_take`, and `reaction_noise`, and discusses both successful predictions and model errors.
 
 ## AI Usage Reflection
 
